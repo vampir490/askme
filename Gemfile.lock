@@ -148,6 +148,9 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    valid_email2 (3.1.2)
+      activemodel (>= 3.2)
+      mail (~> 2.5)
     web-console (3.7.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -174,6 +177,7 @@ DEPENDENCIES
   selenium-webdriver
   sqlite3
   tzinfo-data
+  valid_email2
   web-console (>= 3.3.0)
 
 RUBY VERSION
