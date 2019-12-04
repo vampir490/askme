@@ -41,8 +41,9 @@
 <div class="column-3-4">
   <div class="user-questions buffer-both">
     <div class="buffer-bottom question-content text-lead">
-      Товарищу @<%= @user.username %> задали уже
-      <%= @questions.size %> <%= declension(@questions.size, 'вопрос', 'вопроса', 'вопросов') %>
+      Товарищ @<%= @user.username %> ответил уже на
+      <%= @answers_number %> <%= declension(@questions.size, 'вопрос', 'вопроса', 'вопросов') %>
+      из <%= @questions_number %>. Осталось ответить на <%= @unanswered_number %>
     </div>
     <div class="questions-list">
       <% @questions.each do |question| %>

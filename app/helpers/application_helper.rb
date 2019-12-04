@@ -13,7 +13,7 @@ module ApplicationHelper
 
     return one if (tail10 == 1 && tail100 != 11)
 
-    if ((tail10 >= 2 && tail10 <= 4) && !tail100.between?(12, 14))
+    if ((tail10.between?(2,4)) && !tail100.between?(12, 14))
       return two
     end
 
