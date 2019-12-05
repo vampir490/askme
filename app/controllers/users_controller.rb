@@ -1,47 +1,66 @@
 class UsersController < ApplicationController
+
+  before_action :load_user, except: [:index, :create, :new]
+  before_action :authorize_user, except: [:index, :new, :create, :show]
+
   def index
-    @users = [
-      User.new(
-        id: 1,
-        name: 'Victor',
-        username: 'vampir490',
-        avatar_url: 'http://burundukmedia.com/wp-content/uploads/2016/10/775392.jpg'
-      ),
-      User.new(
-        id: 2,
-        name: 'Misha',
-        username: 'mihalych')
-    ]
+    @users = User.all
   end
 
 
   def new
+    redirect_to root_url, alert: 'You are already logged in' if current_user.present?
+    
+    @user = User.new
+  end
+
+  def create
+    redirect_to root_url, alert: 'You are already logged in' if current_user.present?
+    
+    @user = User.new(user_params)
+
+    if @user.save
+      redirect_to root_url, notice: 'Signed up successfully!'
+    else
+      render 'new'
+    end
   end
 
   def edit
   end
 
+  def update
+    # пытаемся обновить юзера
+    if @user.update(user_params)
+      # Если получилось, отправляем пользователя на его страницу с сообщением
+      redirect_to user_path(@user), notice: 'User updated'
+    else
+      # Если не получилось, как и в create, рисуем страницу редактирования
+      # пользователя со списком ошибок
+      render 'edit'
+    end
+  end
+
   def show
-    @user = User.new(
-      name: 'Victor',
-      username: 'vampir490',
-      avatar_url: 'http://burundukmedia.com/wp-content/uploads/2016/10/775392.jpg'
-    )
+    @questions = @user.questions.order(created_at: :desc)
 
-    @questions = [
-      Question.new(text: 'How are you?', created_at: DateTime.parse('2019-04-03T04:04:02')),
-      Question.new(text: 'Why not replying?', created_at: DateTime.parse('2019-06-14T15:13:30')),
-      Question.new(text: 'So proud?', created_at: DateTime.parse('2019-07-23T14:10:00')),
-      Question.new(text: 'Do you realize, that I know where you live?', created_at: DateTime.parse('2019-12-01T05:50:02')),
-      Question.new(text: 'How hard is that?', created_at: DateTime.parse('2019-12-04T13:50:02'))
-    ]
+    @new_question = @user.questions.build
+  end
 
-    @new_question = Question.new
+  private
 
-    @questions_number = @questions.size
-    @answers_number = @questions_number / 2
-    @unanswered_number = @questions_number - @answers_number
+  def authorize_user
+    reject_user unless @user != current_user 
+  end
 
+  private
 
+  def load_user
+    @user ||= User.find params[:id]
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :password, :password_confirmation,
+                                 :name, :username, :avatar_url)
   end
 end
