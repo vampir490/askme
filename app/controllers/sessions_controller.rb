@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 
     if user.present?
       session[:user_id] = user.id
-      redirect_to root_url, notice: 'Log in successful'
+      redirect_to root_url, notice: 'Log-in successful'
     else
       flash.now.alert = 'Wrong email or password'
       render :new
