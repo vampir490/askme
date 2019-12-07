@@ -52,4 +52,9 @@
       </div>
     <% end %>
   </div>
+  <div class="column-1-4-right">
+    <%= link_to 'Delete user', user_path, method: :delete,
+                data: {confirm: 'Are you sure you want to delete your account?'},
+                class: 'button button-red button-small' %>
+  </div>
 </div>
