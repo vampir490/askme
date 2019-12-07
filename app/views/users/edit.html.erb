@@ -42,6 +42,11 @@
         <%= f.password_field :password_confirmation, class: 'form-text-field' %>
       </div>
 
+      <div class="form-field">
+        <%= f.label 'Background for avatar block', class: 'form-label' %>
+        <%= f.color_field :background_color %>
+      </div>
+
       <div class="form-action buffer-top">
         <%= f.submit 'Save', class: 'button button-dark button-small' %>
       </div>
