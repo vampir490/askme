@@ -1,0 +1,8 @@
+.hashtag-link {
+    text-decoration: underline;
+    color: darkslateblue;
+}
+
+.without-marker {
+    list-style-type: none;
+}

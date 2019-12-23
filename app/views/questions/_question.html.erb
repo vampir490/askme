@@ -11,12 +11,12 @@
     <% end %>
     
     <div class="question-text text-lead">
-      <%= question.text %>
+      <%= convert_hashtags_to_links(question.text) %>
     </div>
 
     <% if question.answer.present? %>
       <div class="question-answer text-lead">
-        <%= question.answer %>
+        <%= convert_hashtags_to_links(question.answer) %>
       </div>
     <% end %>
 

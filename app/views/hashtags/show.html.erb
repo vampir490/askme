@@ -1,0 +1,11 @@
+<div class="text-white">
+  <h1><%= @hashtag.name %></h1>
+  <div>
+    <% @hashtagged_questions.each do |q| %>
+      <div class="buffer-bottom">
+        <%= render partial: 'questions/question',
+                   object: q %>
+      </div>
+    <% end %>
+  </div>
+</div>
