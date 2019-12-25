@@ -14,7 +14,7 @@
 <div class="text-white">
   <h1>Hashtags</h1>
   <ul>
-    <% hashtags_with_questions.each do |hashtag| %>
+    <% Hashtag.with_questions.each do |hashtag| %>
       <li class="without-marker text-medium">
         <%= link_to hashtag.name, hashtag_path(hashtag.id), class: "text-white" %></li>
     <% end %>
