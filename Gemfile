@@ -2,29 +2,21 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.4'
-
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'
+
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
-
 gem 'rails_12factor'
-
 gem 'uglifier'
-
 gem 'jquery-rails'
-
 gem 'valid_email2'
-
 gem 'recaptcha', require: 'recaptcha/rails'
-
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :production do
   gem 'pg'
 end
-
 
 group :development, :test do
   gem 'sqlite3'

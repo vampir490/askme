@@ -39,23 +39,23 @@ class User < ApplicationRecord
   end
 
   def self.authenticate(email, password)
-    # Сперва находим кандидата по email
+    # Finding user by email
     user = find_by(email: email)
 
-    # Если пользователь не найден, возвращает nil
+    # If none is found return nil
     return nil unless user.present?
 
-    # Формируем хэш пароля из того, что передали в метод
+    # Making hash of the password that is transfered
     hashed_password = User.hash_to_string(
       OpenSSL::PKCS5.pbkdf2_hmac(
         password, user.password_salt, ITERATIONS, DIGEST.length, DIGEST
       )
     )
 
-    # Сравнивается password_hash
+    # Compare password_hash
     return user if user.password_hash == hashed_password
 
-    # Иначе, возвращаем nil
+    # If no, return nil
     nil
   end
 end

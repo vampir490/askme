@@ -1,4 +1,5 @@
 module ApplicationHelper
+  # Setting default avatar in case of missing one's
   def user_avatar(user)
     if user.avatar_url.present?
       user.avatar_url
@@ -7,6 +8,7 @@ module ApplicationHelper
     end
   end
 
+  # Self made pluralize
   def declension(number, one, two, multy)
     tail10 = number % 10
     tail100 = number % 100
@@ -20,6 +22,7 @@ module ApplicationHelper
     return multy
   end
 
+  # A method to show font-awesome icons
   def fa_icon(icon_class)
     content_tag 'span', '', class: "fa fa-#{icon_class}"
   end

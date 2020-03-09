@@ -1,4 +1,5 @@
 module QuestionsHelper
+  # Finding hashtag in the text of question
   def convert_hashtags_to_links(text)
     text.scan(Hashtag::REGEX).uniq.each do |tag|
       hashtag = Hashtag.find_by(name: tag.downcase)

@@ -45,8 +45,8 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    # Защита от уязвимости: если текущий пользователь — адресат вопроса,
-    # он может менять ответы на вопрос, ему доступно и поле :answer.
+    # If current user is the one, who gets the question
+    # he can change the answer. And he/she has access to :answer.
     if current_user.present? &&
       params[:question][:user_id].to_i == current_user.id
       params.require(:question).permit(:user_id, :text, :answer)
@@ -55,6 +55,7 @@ class QuestionsController < ApplicationController
     end
   end
 
+  # Recaptcha only for unauthorized users
   def check_captcha(model)
     if current_user.present?
       true

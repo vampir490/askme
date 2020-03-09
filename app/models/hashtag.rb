@@ -5,5 +5,6 @@ class Hashtag < ApplicationRecord
 
   REGEX = /#[[:word:]]+/
 
+  # Finding hashtags with questions
   scope :with_questions, -> { where(id: HashtagQuestion.select(:hashtag_id)) }
 end

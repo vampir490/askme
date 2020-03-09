@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
 
   def new
+    # Not giving logged in user to sign up
     redirect_to root_url, alert: 'You are already logged in' if current_user.present?
     
     @user = User.new
@@ -18,11 +19,13 @@ class UsersController < ApplicationController
     redirect_to root_url, alert: 'You are already logged in' if current_user.present?
     
     @user = User.new(user_params)
-
+    # Trying to create user
     if @user.save
+      # If successfully, redirecting to user's page
       redirect_to root_url, notice: 'Signed up successfully!'
       session[:user_id] = @user.id
     else
+      # If no, render a page to sign up
       render 'new'
     end
   end
@@ -31,13 +34,12 @@ class UsersController < ApplicationController
   end
 
   def update
-    # пытаемся обновить юзера
+    # Trying to update user
     if @user.update(user_params)
-      # Если получилось, отправляем пользователя на его страницу с сообщением
+      # If successfully, redirecting to user's page
       redirect_to user_path(@user), notice: 'User updated'
     else
-      # Если не получилось, как и в create, рисуем страницу редактирования
-      # пользователя со списком ошибок
+      # If no, redirecting to user's page
       render 'edit'
     end
   end

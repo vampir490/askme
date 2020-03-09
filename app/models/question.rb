@@ -9,6 +9,7 @@ class Question < ApplicationRecord
   validates :text, :user, presence: true
   validates :text, length: { maximum: 255 }
 
+  # On update and create we scan the question and update the list of hashtags
   after_commit :update_hashtags, on: [:create, :update]
 
   private

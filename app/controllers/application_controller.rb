@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
 
+  # Redirecting unauthorized user to root
   def reject_user
     redirect_to root_path, alert: 'Unauthorized action!'
   end
